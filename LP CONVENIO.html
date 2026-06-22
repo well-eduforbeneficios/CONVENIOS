@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Convênio Empresarial – Faculdade EDUFOR</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --red: #C0282A;
+    --red-dark: #8f1b1c;
+    --red-light: #fdf0f0;
+    --black: #111111;
+    --gray-dark: #333333;
+    --gray-mid: #666666;
+    --gray-light: #f5f5f5;
+    --white: #ffffff;
+    --radius: 12px;
+    --shadow: 0 2px 16px rgba(0,0,0,0.08);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--white);
+    color: var(--black);
+    line-height: 1.6;
+    font-size: 16px;
+  }
+
+  /* NAV */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--white);
+    border-bottom: 1px solid #eee;
+    padding: 0 24px;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 64px;
+  }
+  .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+  .nav-logo-chevron {
+    width: 32px; height: 32px; background: var(--red);
+    clip-path: polygon(20% 0%, 80% 50%, 20% 100%, 40% 100%, 100% 50%, 40% 0%);
+  }
+  .nav-logo-text { font-size: 18px; font-weight: 800; color: var(--black); letter-spacing: -0.5px; }
+  .nav-logo-sub { font-size: 10px; color: var(--gray-mid); letter-spacing: 1.5px; text-transform: uppercase; margin-top: -2px; }
+  .nav-cta {
+    background: var(--red); color: var(--white);
+    border: none; border-radius: 8px;
+    padding: 10px 20px; font-size: 14px; font-weight: 600;
+    cursor: pointer; text-decoration: none; white-space: nowrap;
+    transition: background 0.2s;
+  }
+  .nav-cta:hover { background: var(--red-dark); }
+
+  /* HERO */
+  .hero {
+    background: var(--black);
+    color: var(--white);
+    padding: 80px 24px 72px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 5px; background: var(--red);
+  }
+  .hero-badge {
+    display: inline-block;
+    background: var(--red); color: var(--white);
+    font-size: 12px; font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase; padding: 6px 16px; border-radius: 20px;
+    margin-bottom: 24px;
+  }
+  .hero h1 {
+    font-size: clamp(32px, 6vw, 64px);
+    font-weight: 900; line-height: 1.05;
+    letter-spacing: -1.5px; margin-bottom: 12px;
+  }
+  .hero h1 span { color: var(--red); }
+  .hero-sub {
+    font-size: clamp(16px, 2.5vw, 20px);
+    color: #aaaaaa; max-width: 560px; margin: 0 auto 36px;
+    font-weight: 400;
+  }
+  .hero-pills {
+    display: flex; flex-wrap: wrap; gap: 10px;
+    justify-content: center; margin-bottom: 40px;
+  }
+  .hero-pill {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    color: #dddddd; font-size: 13px; font-weight: 500;
+    padding: 6px 14px; border-radius: 20px;
+  }
+  .hero-cta {
+    display: inline-block;
+    background: var(--red); color: var(--white);
+    font-size: 16px; font-weight: 700;
+    padding: 16px 36px; border-radius: 10px;
+    text-decoration: none; transition: background 0.2s, transform 0.15s;
+  }
+  .hero-cta:hover { background: var(--red-dark); transform: translateY(-2px); }
+
+  /* STATS */
+  .stats {
+    background: var(--red);
+    padding: 48px 24px;
+  }
+  .stats-grid {
+    max-width: 800px; margin: 0 auto;
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 24px; text-align: center;
+  }
+  .stat-num {
+    font-size: 48px; font-weight: 900; color: var(--white);
+    line-height: 1; letter-spacing: -1px;
+  }
+  .stat-label { font-size: 13px; color: rgba(255,255,255,0.75); margin-top: 6px; font-weight: 500; }
+
+  /* SECTION base */
+  section { padding: 72px 24px; }
+  .section-inner { max-width: 960px; margin: 0 auto; }
+  .section-eyebrow {
+    font-size: 11px; font-weight: 700; letter-spacing: 2.5px;
+    text-transform: uppercase; color: var(--red); margin-bottom: 10px;
+  }
+  .section-title {
+    font-size: clamp(24px, 4vw, 40px); font-weight: 800;
+    letter-spacing: -0.5px; line-height: 1.15; margin-bottom: 40px;
+    color: var(--black);
+  }
+
+  /* BENEFÍCIOS */
+  .beneficios-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+  }
+  .beneficio-card {
+    background: var(--gray-light); border-radius: var(--radius);
+    padding: 28px 24px;
+  }
+  .beneficio-icon {
+    width: 44px; height: 44px; background: var(--red-light);
+    border-radius: 10px; display: flex; align-items: center; justify-content: center;
+    font-size: 22px; margin-bottom: 16px;
+  }
+  .beneficio-title { font-size: 16px; font-weight: 700; margin-bottom: 8px; color: var(--black); }
+  .beneficio-desc { font-size: 14px; color: var(--gray-mid); line-height: 1.6; }
+
+  /* CURSOS */
+  .cursos-bg { background: var(--gray-light); }
+  .cursos-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 14px;
+  }
+  .curso-card {
+    background: var(--white); border-radius: var(--radius);
+    padding: 18px 20px;
+    display: flex; align-items: center; gap: 12px;
+    border: 1.5px solid transparent;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .curso-card:hover { border-color: var(--red); box-shadow: var(--shadow); }
+  .curso-dot {
+    width: 10px; height: 10px; border-radius: 50%;
+    background: var(--red); flex-shrink: 0;
+  }
+  .curso-name { font-size: 14px; font-weight: 600; color: var(--black); }
+
+  /* COMO FUNCIONA */
+  .steps { display: flex; flex-direction: column; gap: 0; }
+  .step {
+    display: flex; gap: 24px; align-items: flex-start;
+    padding: 28px 0; border-bottom: 1px solid #eee;
+  }
+  .step:last-child { border-bottom: none; }
+  .step-num {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: var(--red); color: var(--white);
+    font-size: 18px; font-weight: 800;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .step-content h3 { font-size: 17px; font-weight: 700; margin-bottom: 6px; }
+  .step-content p { font-size: 14px; color: var(--gray-mid); line-height: 1.6; }
+
+  /* FORMULÁRIO */
+  .form-bg { background: var(--black); color: var(--white); }
+  .form-bg .section-title { color: var(--white); }
+  .form-wrap {
+    background: #1a1a1a; border-radius: 16px;
+    padding: 40px 36px; max-width: 600px; margin: 0 auto;
+    border: 1px solid #333;
+  }
+  .form-row { margin-bottom: 18px; }
+  .form-row label {
+    display: block; font-size: 13px; font-weight: 600;
+    color: #aaaaaa; margin-bottom: 6px; letter-spacing: 0.3px;
+  }
+  .form-row input, .form-row select {
+    width: 100%; background: #262626; border: 1px solid #444;
+    border-radius: 8px; padding: 12px 14px;
+    color: var(--white); font-size: 15px; font-family: inherit;
+    outline: none; transition: border-color 0.2s;
+  }
+  .form-row input:focus, .form-row select:focus { border-color: var(--red); }
+  .form-row select option { background: #262626; }
+  .form-submit {
+    width: 100%; background: var(--red); color: var(--white);
+    border: none; border-radius: 10px;
+    padding: 16px; font-size: 16px; font-weight: 700;
+    cursor: pointer; margin-top: 8px; transition: background 0.2s;
+    font-family: inherit;
+  }
+  .form-submit:hover { background: var(--red-dark); }
+  .form-note { font-size: 12px; color: #666; text-align: center; margin-top: 12px; }
+  .form-success {
+    display: none; text-align: center; padding: 32px 20px;
+  }
+  .form-success-icon { font-size: 48px; margin-bottom: 12px; }
+  .form-success h3 { font-size: 22px; font-weight: 800; color: var(--white); margin-bottom: 8px; }
+  .form-success p { font-size: 14px; color: #aaa; }
+
+  /* WHATSAPP */
+  .whatsapp-strip {
+    background: #25D366; padding: 28px 24px;
+    text-align: center;
+  }
+  .whatsapp-btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--white); color: #128C7E;
+    font-size: 16px; font-weight: 700;
+    padding: 14px 28px; border-radius: 10px;
+    text-decoration: none; transition: transform 0.15s;
+  }
+  .whatsapp-btn:hover { transform: translateY(-2px); }
+  .whatsapp-label { font-size: 14px; color: rgba(255,255,255,0.85); margin-bottom: 14px; font-weight: 500; }
+
+  /* FOOTER */
+  footer {
+    background: #0a0a0a; color: #666;
+    padding: 32px 24px; text-align: center;
+    font-size: 13px;
+  }
+  footer strong { color: #aaa; }
+
+  /* RESPONSIVO */
+  @media (max-width: 600px) {
+    .form-wrap { padding: 28px 20px; }
+    nav { padding: 0 16px; }
+    .hero { padding: 60px 16px 56px; }
+  }
+
+  /* ANIMAÇÃO SUAVE */
+  @media (prefers-reduced-motion: no-preference) {
+    .beneficio-card, .curso-card { transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s; }
+    .beneficio-card:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">
+    <div class="nav-logo-chevron"></div>
+    <div>
+      <div class="nav-logo-text">EDUFOR</div>
+      <div class="nav-logo-sub">Faculdade</div>
+    </div>
+  </a>
+  <a class="nav-cta" href="#formulario">Quero meu desconto</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">Convênio Empresarial</div>
+  <h1>Graduação com <span>65% de desconto</span><br>para você e sua família</h1>
+  <p class="hero-sub">Colaboradores de empresas conveniadas à EDUFOR têm desconto garantido até o final do curso — e o benefício se estende aos familiares.</p>
+  <div class="hero-pills">
+    <span class="hero-pill">✓ 11 cursos de graduação</span>
+    <span class="hero-pill">✓ Desconto até o fim do curso</span>
+    <span class="hero-pill">✓ Extensivo a familiares</span>
+    <span class="hero-pill">✓ Sem burocracia</span>
+  </div>
+  <a class="hero-cta" href="#formulario">Garantir meu desconto agora</a>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stats-grid">
+    <div>
+      <div class="stat-num">65%</div>
+      <div class="stat-label">de desconto garantido</div>
+    </div>
+    <div>
+      <div class="stat-num">11</div>
+      <div class="stat-label">cursos disponíveis</div>
+    </div>
+    <div>
+      <div class="stat-num">100+</div>
+      <div class="stat-label">empresas conveniadas</div>
+    </div>
+    <div>
+      <div class="stat-num">∞</div>
+      <div class="stat-label">válido até formar</div>
+    </div>
+  </div>
+</div>
+
+<!-- BENEFÍCIOS -->
+<section>
+  <div class="section-inner">
+    <div class="section-eyebrow">Por que escolher a EDUFOR</div>
+    <div class="section-title">Benefícios do convênio</div>
+    <div class="beneficios-grid">
+      <div class="beneficio-card">
+        <div class="beneficio-icon">🎓</div>
+        <div class="beneficio-title">65% de desconto fixo</div>
+        <div class="beneficio-desc">O desconto vale desde o primeiro dia até a sua formatura — sem surpresas nem reajustes surpresa.</div>
+      </div>
+      <div class="beneficio-card">
+        <div class="beneficio-icon">👨‍👩‍👧</div>
+        <div class="beneficio-title">Extensivo a familiares</div>
+        <div class="beneficio-desc">Cônjuge, filhos e demais familiares também têm direito ao benefício. Toda a família qualificada.</div>
+      </div>
+      <div class="beneficio-card">
+        <div class="beneficio-icon">📋</div>
+        <div class="beneficio-title">Inscrição simplificada</div>
+        <div class="beneficio-desc">Processo rápido e sem burocracia. Preencha o formulário e nossa equipe entra em contato.</div>
+      </div>
+      <div class="beneficio-card">
+        <div class="beneficio-icon">🏆</div>
+        <div class="beneficio-title">Graduação reconhecida</div>
+        <div class="beneficio-desc">Cursos autorizados pelo MEC com diploma reconhecido em todo o território nacional.</div>
+      </div>
+      <div class="beneficio-card">
+        <div class="beneficio-icon">📍</div>
+        <div class="beneficio-title">Em São Luís – MA</div>
+        <div class="beneficio-desc">Estrutura moderna na capital maranhense, com atendimento presencial e suporte ao aluno.</div>
+      </div>
+      <div class="beneficio-card">
+        <div class="beneficio-icon">📞</div>
+        <div class="beneficio-title">Suporte dedicado</div>
+        <div class="beneficio-desc">Nossa equipe de atendimento está disponível por WhatsApp para tirar dúvidas e orientar a matrícula.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CURSOS -->
+<section class="cursos-bg">
+  <div class="section-inner">
+    <div class="section-eyebrow">Grade de cursos</div>
+    <div class="section-title">Escolha o seu curso</div>
+    <div class="cursos-grid">
+      <div class="curso-card"><div class="curso-dot"></div><div class="curso-name">Administração</div></div>
+      <div class="curso-card"><div class="curso-dot"></div><div class="curso-name">Análise e Des. de Sistemas</div></div>
+      <div class="curso-card"><div class="curso-dot"></div><div class="curso-name">Biomedicina</div></div>
+      <div class="curso-card"><div class="curso-dot"></div><div class="curso-name">Ed. Física – Licenciatura</div></div>
+      <div class="curso-card"><div class="curso-dot"></div><div class="curso-name">Farmácia</div></div>
+      <div class="curso-card"><div class="curso-dot"></div><div class="curso-name">Fisioterapia</div></div>
+      <div class="curso-card"><div class="curso-dot"></div><div class="curso-name">Gestão de Recursos Humanos</div></div>
+      <div class="curso-card"><div class="curso-dot"></div><div class="curso-name">Logística</div></div>
+      <div class="curso-card"><div class="curso-dot"></div><div class="curso-name">Nutrição</div></div>
+      <div class="curso-card"><div class="curso-dot"></div><div class="curso-name">Pedagogia</div></div>
+      <div class="curso-card"><div class="curso-dot"></div><div class="curso-name">Serviço Social</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- COMO FUNCIONA -->
+<section>
+  <div class="section-inner">
+    <div class="section-eyebrow">Passo a passo</div>
+    <div class="section-title">Como garantir seu desconto</div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <h3>Preencha o formulário abaixo</h3>
+          <p>Informe seus dados e o curso de interesse. Leva menos de 2 minutos.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h3>Nossa equipe entra em contato</h3>
+          <p>Um consultor da EDUFOR retorna por WhatsApp para confirmar o convênio e orientar os próximos passos.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <h3>Faça sua matrícula com desconto</h3>
+          <p>Apresente o comprovante de vínculo com a empresa conveniada e garanta 65% de desconto na matrícula e mensalidades.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <h3>Comece a estudar</h3>
+          <p>Desconto garantido até o fim do curso — para você e também para seus familiares.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHATSAPP -->
+<div class="whatsapp-strip">
+  <div class="whatsapp-label">Prefere falar diretamente com a gente?</div>
+  <a class="whatsapp-btn" href="https://wa.me/559833016715?text=Ol%C3%A1%21+Tenho+interesse+no+conv%C3%AAnio+da+EDUFOR+e+gostaria+de+mais+informa%C3%A7%C3%B5es." target="_blank" rel="noopener">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+    Falar no WhatsApp — (98) 3301-6715
+  </a>
+</div>
+
+<!-- FORMULÁRIO -->
+<section class="form-bg" id="formulario">
+  <div class="section-inner" style="text-align:center;">
+    <div class="section-eyebrow" style="color:#C0282A;">Inscrição</div>
+    <div class="section-title">Quero garantir meu desconto</div>
+    <div class="form-wrap">
+      <div id="form-content">
+        <div class="form-row">
+          <label for="nome">Nome completo</label>
+          <input type="text" id="nome" placeholder="Seu nome completo" required>
+        </div>
+        <div class="form-row">
+          <label for="telefone">WhatsApp</label>
+          <input type="tel" id="telefone" placeholder="(98) 99999-9999" required>
+        </div>
+        <div class="form-row">
+          <label for="email">E-mail</label>
+          <input type="email" id="email" placeholder="seu@email.com">
+        </div>
+        <div class="form-row">
+          <label for="empresa">Empresa onde trabalha</label>
+          <input type="text" id="empresa" placeholder="Nome da empresa conveniada">
+        </div>
+        <div class="form-row">
+          <label for="curso">Curso de interesse</label>
+          <select id="curso">
+            <option value="">Selecione um curso</option>
+            <option>Administração</option>
+            <option>Análise e Desenvolvimento de Sistemas</option>
+            <option>Biomedicina</option>
+            <option>Educação Física – Licenciatura</option>
+            <option>Farmácia</option>
+            <option>Fisioterapia</option>
+            <option>Gestão de Recursos Humanos</option>
+            <option>Logística</option>
+            <option>Nutrição</option>
+            <option>Pedagogia</option>
+            <option>Serviço Social</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label for="familiar">É colaborador ou familiar?</label>
+          <select id="familiar">
+            <option value="">Selecione</option>
+            <option>Colaborador da empresa</option>
+            <option>Familiar de colaborador</option>
+          </select>
+        </div>
+        <button class="form-submit" onclick="enviarFormulario()">Garantir meu desconto de 65%</button>
+        <div class="form-note">Seus dados são usados apenas para contato da EDUFOR. Sem spam.</div>
+      </div>
+      <div class="form-success" id="form-success">
+        <div class="form-success-icon">🎓</div>
+        <h3>Inscrição recebida!</h3>
+        <p>Nossa equipe vai entrar em contato pelo WhatsApp em breve para confirmar seu desconto e orientar a matrícula.</p>
+        <br>
+        <a href="https://wa.me/559833016715?text=Ol%C3%A1%21+Acabei+de+preencher+o+formul%C3%A1rio+e+quero+confirmar+minha+inscri%C3%A7%C3%A3o+no+conv%C3%AAnio+da+EDUFOR." target="_blank" rel="noopener" style="display:inline-block;background:var(--red);color:white;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:700;font-size:14px;margin-top:8px;">Confirmar pelo WhatsApp</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <strong>Faculdade EDUFOR</strong> — Construindo o seu futuro<br>
+  <span style="margin-top:6px;display:block;">(98) 3301-6715 · São Luís, Maranhão</span>
+</footer>
+
+<script>
+  function enviarFormulario() {
+    const nome = document.getElementById('nome').value.trim();
+    const tel = document.getElementById('telefone').value.trim();
+    const curso = document.getElementById('curso').value;
+
+    if (!nome) { alert('Por favor, informe seu nome completo.'); return; }
+    if (!tel) { alert('Por favor, informe seu WhatsApp.'); return; }
+    if (!curso) { alert('Por favor, selecione o curso de interesse.'); return; }
+
+    const empresa = document.getElementById('empresa').value.trim();
+    const familiar = document.getElementById('familiar').value;
+    const email = document.getElementById('email').value.trim();
+
+    const msg = encodeURIComponent(
+      `Olá! Vim pelo formulário do convênio EDUFOR.\n\n` +
+      `Nome: ${nome}\n` +
+      `Telefone: ${tel}\n` +
+      (email ? `E-mail: ${email}\n` : '') +
+      (empresa ? `Empresa: ${empresa}\n` : '') +
+      `Curso: ${curso}\n` +
+      (familiar ? `Vínculo: ${familiar}` : '')
+    );
+
+    document.getElementById('form-content').style.display = 'none';
+    document.getElementById('form-success').style.display = 'block';
+
+    setTimeout(() => {
+      window.open(`https://wa.me/559833016715?text=${msg}`, '_blank');
+    }, 800);
+  }
+
+  document.getElementById('telefone').addEventListener('input', function(e) {
+    let v = e.target.value.replace(/\D/g, '');
+    if (v.length <= 11) {
+      v = v.replace(/^(\d{2})(\d{5})(\d{4})$/, '($1) $2-$3');
+      v = v.replace(/^(\d{2})(\d{4})(\d{4})$/, '($1) $2-$3');
+    }
+    e.target.value = v;
+  });
+</script>
+</body>
+</html>
