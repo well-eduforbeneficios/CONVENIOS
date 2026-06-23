@@ -515,12 +515,19 @@
       (familiar ? `Vínculo: ${familiar}` : '')
     );
 
-    document.getElementById('form-content').style.display = 'none';
-    document.getElementById('form-success').style.display = 'block';
+    fetch('https://script.google.com/macros/s/AKfycbyhfrVkaK75hVDTfMIiIMDStJemnk0lUezf0tRMi3S4KZqUdfIF73-pv6wq8VzlwVZ7/exec', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ nome, telefone: tel, email, empresa, curso, familiar }),
+      mode: 'no-cors'
+    }).finally(() => {
+      document.getElementById('form-content').style.display = 'none';
+      document.getElementById('form-success').style.display = 'block';
 
-    setTimeout(() => {
-      window.open(`https://wa.me/559833016715?text=${msg}`, '_blank');
-    }, 800);
+      setTimeout(() => {
+        window.open(`https://wa.me/559833016715?text=${msg}`, '_blank');
+      }, 800);
+    });
   }
 
   document.getElementById('telefone').addEventListener('input', function(e) {
